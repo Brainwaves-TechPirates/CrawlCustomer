@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+	var webSocket = 
+		new WebSocket('ws://localhost:8080/CrawlCustomerApp/websocket');
+
+	webSocket.onerror = function(event) {
+		onError(event)
+	};
+
+	webSocket.onopen = function(event) {
+		onOpen(event)
+	};
+
+	webSocket.onmessage = function(event) {
+		onMessage(event)
+	};
+
+	function onMessage(event) {
+		document.getElementById('messages').innerHTML 
+			+= '<br />' + event.data;
+	}
+
+	function onOpen(event) {
+            onOpen.counter = 0; 
+	    webSocket.send(onOpen.counter++);
+	}
+          
+	function onError(event) {
+		alert(event.data);
+	}
+
+        function getTimeStamp() {
+       var now = new Date();
+       return ((now.getMonth() + 1) + '/' + (now.getDate()) + '/' + now.getFullYear() + " " + now.getHours() + ':'
+                     + ((now.getMinutes() < 10) ? ("0" + now.getMinutes()) : (now.getMinutes())) + ':' + ((now.getSeconds() < 10) ? ("0" + now
+                     .getSeconds()) : (now.getSeconds())));
+        }
+	function onLoanStart() {
+	webSocket.send("Clicked Loan tab" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+        function onWaysToBankStart() {
+	webSocket.send("Clicked Ways to bank tab" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+        function onCarLoanStart() {
+	webSocket.send("Clicked on car Loan" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+        function onHomeLoanStart() {
+	webSocket.send("Clicked on Home Loan" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+         function onWaysOnlineStart() {
+	 webSocket.send("prefers online way of banking" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+         function onWaysPhoneStart() {
+	webSocket.send("prefers phone way of banking" +"  "+ getTimeStamp());
+		return false;
+	}
+        
+         function onWaysPersonStart() {
+	webSocket.send("prefers face to face way of banking" +"  "+ getTimeStamp());
+		return false;
+	}
+</script>
+<table>
+	<tr>
+		<td><img src="soc_gen.jpg" alt="Bank" height="80" width="900"
+			align="left"></td>
+	</tr>
+	<tr>
+		<td><ul class="nav nav-tabs">
+				<li><a href="#id1" data-toggle="tab">Home</a></li>
+                                <li><a href="#id2" data-toggle="tab" onclick="onLoanStart()">Loan</a></li>
+				<li><a href="#id3" data-toggle="tab" onclick="onWaysToBankStart()">Ways to Bank </a></li>
+			</ul></td>
+	</tr>
+</table>
+
+<div class="tab-content" style="background-color: #F0F8FF">
+	<div class="tab-pane fade" id="id1"></div>
+	<div class="tab-pane fade" id="id2">
+		<ul style="padding-left: 80px">
+			<li><a href="CarLoan_1.html" onclick="onCarLoanStart()">Car Loan</a></li>
+			<li><a href="#id2" data-toggle="tab" onclick="onHomeLoanStart()">Home Loan</a></li>
+		</ul>
+	</div>
+	<div class="tab-pane fade" id="id3">
+		<ul style="padding-left: 160px">
+			<li><a href="#id2" data-toggle="tab" onclick="onWaysOnlineStart()">Bank Online</a></li>
+			<li><a href="#id2" data-toggle="tab" onclick="onWaysPhoneStart()">Bank with your phone</a></li>
+			<li><a href="#id3" data-toggle="tab" onclick="onWaysPersonStart()">Bank in person</a></li>
+		</ul>
+	</div>
+</div>
+
+
+<table>
+	<img src="Bank.jpg" alt="Bank" height="300" width="600" align="left">
+
+	<form role="form">
+		<tr class="form-group">
+			<td style="padding-left: 40px"><h3>Secure Login</h3></td>
+		</tr>
+		<tr>
+			<td style="padding-left: 40px">Customer ID</td>
+			<td style="padding-left: 40px"><input type="email" id="email"
+				placeholder="Enter ID" size="40"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td style="padding-left: 40px">Password</td>
+			<td style="padding-left: 40px"><input type="password" id="pwd"
+				placeholder="Enter password" size="40"></td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td></td>
+			<td style="padding-left: 40px"><table>
+					<tr>
+						<td><input type="submit" value="login" /></td>
+						<td><input type="reset" value="clear" /></td>
+					</tr>
+				</table></td>
+		</tr>
+	</form>
+</table>
+<div id="messages"></div>
+
+</body>
+</html>

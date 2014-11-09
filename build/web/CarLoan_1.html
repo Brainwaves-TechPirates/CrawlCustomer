@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script type="text/javascript">
+	var webSocket = 
+		new WebSocket('ws://localhost:8080/CrawlCustomerApp/websocket');
+       </script> 
+<script type="text/javascript">
+function description1()
+{
+	alert("Car loan @ 8%");
+        webSocket.send("clicked on car loan features"+"  "+ getTimeStamp());
+}
+function description2()
+{
+	alert("Lowest rate of interest");
+        webSocket.send("clicked on car loan benefits"+"  "+ getTimeStamp());
+}
+function description3()
+{
+	alert("Best EMI offers for you");
+        webSocket.send("clicked on car loan EMI offers"+"  "+ getTimeStamp());
+}
+
+ function getTimeStamp() {
+       var now = new Date();
+       return ((now.getMonth() + 1) + '/' + (now.getDate()) + '/' + now.getFullYear() + " " + now.getHours() + ':'
+                     + ((now.getMinutes() < 10) ? ("0" + now.getMinutes()) : (now.getMinutes())) + ':' + ((now.getSeconds() < 10) ? ("0" + now
+                     .getSeconds()) : (now.getSeconds())));
+    }
+function myFunction(){
+	var person = prompt("Please enter your E-mail ID","");
+        webSocket.send("User ID : " +person.toString()+"  "+ getTimeStamp());
+	while (person == false) {
+		person=prompt("Please enter your E-mail ID","");
+	}
+        
+}
+</script>
+<meta charset="ISO-8859-1">
+<title>Car loan</title>
+</head>
+<body onload="myFunction();" bgcolor="#F0F8FF">
+<table>
+<tr><td>
+<img src="car-loans-D.jpg" alt="Bank" height="200" width="1000" align="left"><td><tr>
+<tr><td><h2> Car Loan  </h2>
+<p> 
+Quick, competitive and transparent car loans from our Bank ,You no longer have to wait
+to buy that dream car because SG Bank offers great car loan deals with up to 100% finance. 
+Whether it is a new car, a pre-owner car or even a loan against a car,we can offer you a car
+loan at attractive interest rates and flexible repayment tenures.Fast approvals, personalised 
+service and utmost transparency make us the leader in car loans in India.
+</p></td></tr>
+	<tr><td><input type="button" id="id1" onclick="description1();" value="Features" /></td></tr>
+	<tr><td><input type="button" id="id2" onclick="description2();" value="Benefits" /></td></tr>
+	<tr><td><input type="button" id="id3" onclick="description3();" value="Fast track your car loan EMI" /></td></tr>	
+</table>			
+</body>
+</html>
